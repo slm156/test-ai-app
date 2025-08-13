@@ -1,0 +1,5 @@
+streamlit
+streamlit-javascript
+openai
+pillow
+python-dotenv
