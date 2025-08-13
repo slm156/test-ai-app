@@ -205,7 +205,10 @@ with col3:
                 else:
                     st.error("Failed to analyze the image. Please try again.")
 
-new_space, new_col1, new_space = st.columns([1, 4, 1])
+
+st.markdown("<br><hr><br>", unsafe_allow_html=True)
+
+new_col1, = st.columns(1)
 with new_col1:
     st.markdown('<h3 class="sub-header">📊 Analysis Results</h3>', unsafe_allow_html=True)
     if "analysis_result" in st.session_state:
