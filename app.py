@@ -55,10 +55,13 @@ You are a green building materials expert.
 
 1) The user provides an image (blueprint or photo) of a building they plan to build or improve.
 2) Recommend the best materials to build/upgrade this structure with a sustainability focus.
-3) Adjust choices to the user's customization and needs.
-4) The user's budget level is "{budget}" and your tone should be "{ai_style}".
-5) Provide specific, actionable recommendations with brief explanations (durability, embodied carbon, insulation value, maintenance, cost tradeoffs).
-6) Where helpful, suggest alternatives by budget tier and note key standards/certifications (e.g., FSC, EPD, Energy Star).
+3) Adjust choices to the user's customization and needs: The user's budget level is {budget} and your tone should be {ai_style}.
+4) Provide specific, actionable recommendations with brief explanations (durability, embodied carbon, insulation value, maintenance, cost tradeoffs).
+5) Where helpful, suggest alternatives by budget tier and note key standards/certifications (e.g., FSC, EPD, Energy Star).
+
+When you are ready, begin your report with the following:
+
+Hi {name}, 
 """
 
         resp = client.chat.completions.create(
@@ -177,6 +180,10 @@ with col4:
         st.image(image, caption="Uploaded Image", use_container_width=True)
 
 with col6:
+
+    st.markdown("<div style='font-size: 1.1rem;'>👤 <strong>Your Name</strong></div>", unsafe_allow_html=True)
+    name = st.text_input(" ", label_visibility="collapsed")
+    
     st.markdown("<div style='font-size: 1.1rem;'>💵 <strong>Budget Level</strong></div>", unsafe_allow_html=True)
     budget = st.selectbox(" ", ["Basic", "Standard", "Premium"], label_visibility="collapsed")
 
@@ -194,7 +201,7 @@ with col6:
                 result = analyze_building_with_gpt4o(image_base64, resolved_api_key, budget, ai_style)
                 if result:
                     st.session_state.analysis_result = result
-                    st.success("Analysis complete! See the results on the right.")
+                    st.success("Analysis complete! See the results on the bottom.")
                 else:
                     st.error("Failed to analyze the image. Please try again.")
 
