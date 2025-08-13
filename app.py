@@ -154,9 +154,9 @@ st.markdown(
 
 st.markdown("<br><hr><br>", unsafe_allow_html=True)
 
-col2, col3, col4, col5, col6, space, col7 = st.columns([2, 1, 2, 1, 2, 1, 2])
+col1, space, col2, space, col3 = st.columns([2, 1, 2, 1, 2])
 
-with col2:
+with col1:
     st.markdown(
         """
         <h5>ℹ️ Instructions:</h5>
@@ -169,7 +169,7 @@ with col2:
         unsafe_allow_html=True,
     )
 
-with col4:
+with col2:
     st.markdown("<h5>📤 Upload Your File</h5>", unsafe_allow_html=True)
     uploaded_file = st.file_uploader(
         "Choose an image file", type=["png", "jpg", "jpeg"], help="Upload a clear photo or blueprint."
@@ -179,7 +179,7 @@ with col4:
         image = Image.open(uploaded_file)
         st.image(image, caption="Uploaded Image", use_container_width=True)
 
-with col6:
+with col3:
 
     st.markdown("<div style='font-size: 1.1rem;'>👤 <strong>Your Name</strong></div>", unsafe_allow_html=True)
     name = st.text_input(" ", label_visibility="collapsed")
@@ -205,7 +205,8 @@ with col6:
                 else:
                     st.error("Failed to analyze the image. Please try again.")
 
-with col7:
+new_space, new_col1, new_space = st.columns([1, 4, 1])
+with new_col1:
     st.markdown('<h3 class="sub-header">📊 Analysis Results</h3>', unsafe_allow_html=True)
     if "analysis_result" in st.session_state:
         st.markdown('<div class="result-section">', unsafe_allow_html=True)
@@ -220,4 +221,4 @@ with col7:
             mime="text/plain",
         )
     else:
-        st.info("Upload a photo and click 'Analyze Building' to see recommendations here.")
+        st.info("Upload a photo and click '🚀 Submit' to see recommendations here.")
